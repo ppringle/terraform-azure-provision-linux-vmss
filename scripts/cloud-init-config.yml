@@ -1,0 +1,224 @@
+#cloud-config
+
+apt:
+  preserve_sources_list: true
+  sources:
+    microsoft-azurecli.list:
+      source: "deb https://packages.microsoft.com/repos/azure-cli jammy main"
+      key: |
+        -----BEGIN PGP PUBLIC KEY BLOCK-----
+        Version: GnuPG v1.4.7 (GNU/Linux)
+
+        mQENBFYxWIwBCADAKoZhZlJxGNGWzqV+1OG1xiQeoowKhssGAKvd+buXCGISZJwT
+        LXZqIcIiLP7pqdcZWtE9bSc7yBY2MalDp9Liu0KekywQ6VVX1T72NPf5Ev6x6DLV
+        7aVWsCzUAF+eb7DC9fPuFLEdxmOEYoPjzrQ7cCnSV4JQxAqhU4T6OjbvRazGl3ag
+        OeizPXmRljMtUUttHQZnRhtlzkmwIrUivbfFPD+fEoHJ1+uIdfOzZX8/oKHKLe2j
+        H632kvsNzJFlROVvGLYAk2WRcLu+RjjggixhwiB+Mu/A8Tf4V6b+YppS44q8EvVr
+        M+QvY7LNSOffSO6Slsy9oisGTdfE39nC7pVRABEBAAG0N01pY3Jvc29mdCAoUmVs
+        ZWFzZSBzaWduaW5nKSA8Z3Bnc2VjdXJpdHlAbWljcm9zb2Z0LmNvbT6JATUEEwEC
+        AB8FAlYxWIwCGwMGCwkIBwMCBBUCCAMDFgIBAh4BAheAAAoJEOs+lK2+EinPGpsH
+        /32vKy29Hg51H9dfFJMx0/a/F+5vKeCeVqimvyTM04C+XENNuSbYZ3eRPHGHFLqe
+        MNGxsfb7C7ZxEeW7J/vSzRgHxm7ZvESisUYRFq2sgkJ+HFERNrqfci45bdhmrUsy
+        7SWw9ybxdFOkuQoyKD3tBmiGfONQMlBaOMWdAsic965rvJsd5zYaZZFI1UwTkFXV
+        KJt3bp3Ngn1vEYXwijGTa+FXz6GLHueJwF0I7ug34DgUkAFvAs8Hacr2DRYxL5RJ
+        XdNgj4Jd2/g6T9InmWT0hASljur+dJnzNiNCkbn9KbX7J/qK1IbR8y560yRmFsU+
+        NdCFTW7wY0Fb1fWJ+/KTsC4=
+        =J6gs
+        -----END PGP PUBLIC KEY BLOCK-----
+    microsoft-prod.list:
+      source: "deb https://packages.microsoft.com/ubuntu/20.04/prod focal main"
+      key: |
+        -----BEGIN PGP PUBLIC KEY BLOCK-----
+        Version: GnuPG v1.4.7 (GNU/Linux)
+
+        mQENBFYxWIwBCADAKoZhZlJxGNGWzqV+1OG1xiQeoowKhssGAKvd+buXCGISZJwT
+        LXZqIcIiLP7pqdcZWtE9bSc7yBY2MalDp9Liu0KekywQ6VVX1T72NPf5Ev6x6DLV
+        7aVWsCzUAF+eb7DC9fPuFLEdxmOEYoPjzrQ7cCnSV4JQxAqhU4T6OjbvRazGl3ag
+        OeizPXmRljMtUUttHQZnRhtlzkmwIrUivbfFPD+fEoHJ1+uIdfOzZX8/oKHKLe2j
+        H632kvsNzJFlROVvGLYAk2WRcLu+RjjggixhwiB+Mu/A8Tf4V6b+YppS44q8EvVr
+        M+QvY7LNSOffSO6Slsy9oisGTdfE39nC7pVRABEBAAG0N01pY3Jvc29mdCAoUmVs
+        ZWFzZSBzaWduaW5nKSA8Z3Bnc2VjdXJpdHlAbWljcm9zb2Z0LmNvbT6JATUEEwEC
+        AB8FAlYxWIwCGwMGCwkIBwMCBBUCCAMDFgIBAh4BAheAAAoJEOs+lK2+EinPGpsH
+        /32vKy29Hg51H9dfFJMx0/a/F+5vKeCeVqimvyTM04C+XENNuSbYZ3eRPHGHFLqe
+        MNGxsfb7C7ZxEeW7J/vSzRgHxm7ZvESisUYRFq2sgkJ+HFERNrqfci45bdhmrUsy
+        7SWw9ybxdFOkuQoyKD3tBmiGfONQMlBaOMWdAsic965rvJsd5zYaZZFI1UwTkFXV
+        KJt3bp3Ngn1vEYXwijGTa+FXz6GLHueJwF0I7ug34DgUkAFvAs8Hacr2DRYxL5RJ
+        XdNgj4Jd2/g6T9InmWT0hASljur+dJnzNiNCkbn9KbX7J/qK1IbR8y560yRmFsU+
+        NdCFTW7wY0Fb1fWJ+/KTsC4=
+        =J6gs
+        -----END PGP PUBLIC KEY BLOCK-----
+
+package_update: true
+package_upgrade: true
+
+packages:
+  - apt-transport-https
+  - azure-cli
+  - ca-certificates
+  - curl
+  - git
+  - gnupg-agent
+  - lsb-release
+  - software-properties-common
+  - wget
+  - unzip
+  - jq
+  - chromium-browser
+  - libgtk2.0-0
+  - libgtk-3-0
+  - libgbm-dev
+  - libnotify-dev
+  - libnss3
+  - libxss1
+  - libasound2
+  - libxtst6
+  - xauth
+  - xdg-utils
+  - xvfb
+
+bootcmd:
+  # The purpose of the script below, is to ensure that all provisioning scripts are run before the agent is registered with ADO
+  # See link: https://github.com/microsoft/azure-pipelines-agent/issues/2866
+  - mkdir -p /etc/systemd/system/walinuxagent.service.d
+  - echo "[Unit]\nAfter=cloud-final.service" > /etc/systemd/system/walinuxagent.service.d/override.conf
+  - sed "s/After=multi-user.target//g" /lib/systemd/system/cloud-final.service > /etc/systemd/system/cloud-final.service
+  - systemctl daemon-reload
+
+write_files:
+  - path: /run/scripts/install-az-tools.sh
+    content: |
+      #!/bin/bash
+      az extension add --name azure-devops
+  - path: /run/scripts/install-docker.sh
+    content: |
+      #!/bin/bash
+      set -ex
+      VM_USER=armyadmin
+      ### Install Docker ###
+      curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+      add-apt-repository "deb [arch=$(dpkg --print-architecture)] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+      apt-get update -y
+      apt-get install -y docker-ce docker-ce-cli containerd.io
+      usermod -aG docker $VM_USER
+      sudo chown -R $VM_USER:docker /var/run/docker.sock
+      sudo chmod 660 /var/run/docker.sock
+      systemctl start docker
+      systemctl enable docker
+      echo 'Script executed successfully!' >> /run/scripts/status.txt
+    permissions: '0755'
+  - path: /run/scripts/install-node-tools.sh
+    content: |
+      #!/bin/bash
+      set -ex
+      VM_USER=armyadmin
+      ### Install NVM ###
+      apt-get update && apt-get install -y ca-certificates curl gnupg
+      curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg
+      NODE_MAJOR=21
+      echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_$NODE_MAJOR.x nodistro main" | sudo tee /etc/apt/sources.list.d/nodesource.list
+      apt-get update && apt-get install nodejs -y
+      npm install -g pnpm
+    permissions: '0755'
+  - path: /run/scripts/install-k8s-tools.sh
+    content: |
+      #!/bin/bash
+      set -ex
+      ### Install k8s tools ###
+      curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
+      echo 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /' | sudo tee /etc/apt/sources.list.d/kubernetes.list
+      apt update
+      apt install -y kubectl=1.28.1-1.1
+      if ! command -v kubectl &> /dev/null
+      then
+          echo "kubectl command could not be successfully installed !"
+          exit 1
+      fi
+      echo 'k8s tooling was installed successfully !'
+    permissions: '0755'
+  - path: /run/scripts/install-azure-devops-agent.sh
+    content: |
+      #!/bin/bash
+      set -eux
+      VM_USER=armyadmin
+      mkdir /agent
+      cd /agent
+      wget https://vstsagentpackage.azureedge.net/agent/3.236.1/vsts-agent-linux-x64-3.236.1.tar.gz
+      tar zxvf ./vsts-agent-linux-x64-3.236.1.tar.gz
+      chown -R armyadmin:armyadmin .
+      runuser -l $VM_USER -c '/agent/config.sh --unattended  --url https://dev.azure.com/ARMY-ARMEE --replace --auth pat --token $CI_AGENT_PAT --pool $AZURE_DEVOPS_POOL_NAME'
+      sudo ./svc.sh install $VM_USER
+      sudo ./svc.sh start
+    permissions: '0755'
+  - path: /usr/local/share/ca-certificates/jdcpRootCA.crt
+    content: |
+      -----BEGIN CERTIFICATE-----
+      MIIFJzCCAw+gAwIBAgIQYhP5d3xYGpdMUuqX7CLI/TANBgkqhkiG9w0BAQsFADAm
+      MSQwIgYDVQQDExswMThnYy1KRENQUk9PVC1DQS1BdXRob3JpdHkwHhcNMjIwMzE3
+      MTQ0NDA5WhcNNDcwMzE3MTQ1NDA4WjAmMSQwIgYDVQQDExswMThnYy1KRENQUk9P
+      VC1DQS1BdXRob3JpdHkwggIiMA0GCSqGSIb3DQEBAQUAA4ICDwAwggIKAoICAQDO
+      xldn3abvSTW+67O6RGbJR+LMUgIDHNGCAOHbN+e9x49P6gyg4qDHzQ13xWPRKr5z
+      R/e7WwAI5SnEVyWuh2XQ5fC0/pEPuX2hxKSf2dQwxE/0vI5H6lfOqjgQ1HDcbieI
+      CAEvoqs4Gxj3pW7jSUbb/71gTstiRSZtxQPtMKDdM554rtsiTdlUw0+rvkhgT1uV
+      e202+yNpLRL7mC+yXnxVKXe0F2FLCOpA7SPduHqDsmeeSy5LWcpWYznJ2eX8bHvd
+      sgQhVc95eJDBgStot4nFb61vKQRnntGVRf0dgCWlPI4+QwlyyZquW17fqMZ10xL+
+      4RFr6QxiZXxBpta9z+9o76+VNM5eX/hZ9wbVIem0TED9zB7TJB36IUcJA5BkRia/
+      yFkf0A4G3Tv7RLeeNcQBAPd1pKyHK3q7QZus2Gp8kuvHXLtWmoGwfmAFtaVaPfzP
+      B0oq/c3RAG/v0SWIp9j73qxozeo9zLCQYOa/HcOH31cHPUhtQFc3bhZIaAbsM5Jl
+      Jv7Pz5RD8vGmOJ34XESmJS3dTRUWTKPyyYTJKq7Ifcor9aUEVd8Wlk4ovqTd28iV
+      du1TSUHEcLb7P+Mg4gDgxNgHLOfC0KwB12USb87RwNAAG+aSJaXCRTS4J6IvIXyS
+      JZax0ecxKJIIAmp5ofk+vpFE83Gjt3T2nimUa4xZRQIDAQABo1EwTzALBgNVHQ8E
+      BAMCAYYwDwYDVR0TAQH/BAUwAwEB/zAdBgNVHQ4EFgQU1kZ1mMl0hcbm8BXLSeAk
+      7YSZ3e4wEAYJKwYBBAGCNxUBBAMCAQAwDQYJKoZIhvcNAQELBQADggIBAFpycFVI
+      d0TyLcV77mqaN52RqUjRyNLWzAjL4wP3Iw0i4O2KD6xA6hjgKOA9WdZzuTaLXhcF
+      WoKKXZrmZjrDSVPtGM5qddy0gIAfxNM7GGXc2PFR9s3GDp36Hta9oH2PNr36fya6
+      3YiUSTLWE2eFf1JdYaVuaOdxax02vhE3nEpLwVj2hEJYPMa/37T9zUK/F6F8BlkQ
+      dn06lIYoe/cS9qtH73fDdCE8+N6e2zOsrJOW2nt+m6Clcv7S57TovI94WxQ+caXW
+      GExkfGlbbDpigvYCn9MnXKgRO/ZbqwNFSxt+WdNNDLr2oKpQ7w7AgGOaTVYHoXqs
+      5U4ScKQq/3qRLvWRzDesmPdDGaATrVpvsU5ECm5WrCRFJr4Df2PvKq1ZWwTANxhi
+      roVZlL5uuDx73LzWaPylV1GeZ5bQU5n6BQJAOfnKwSRnGPtFCvYTjE/uCAiYKxBr
+      tdZh1FT3vKXybqmEAesGx8eRAqjMVK6OKhY+ALCKKzZO0Hg4oegvJYRMYlek8fe3
+      itIRkMeoNBN+ou0+kWtIEUO57qw2Krcezm/T7qW8KIOFipM1bWu9zwkpfOVlIArp
+      wo69sLku1PEcPT8tDBqLv7LyvPRB9GjCZFavbCMNFFKR/XgOH9SzPpkv2Nle8VBT
+      vPeTeqUsQ6abRyEvSUCKVJqQdPYZ4Agf0cKQ
+      -----END CERTIFICATE-----
+    permissions: '0755'
+  - path: /usr/local/share/ca-certificates/jdcpIntermediateCA.crt
+    content: |
+      -----BEGIN CERTIFICATE-----
+      MIIFejCCA2KgAwIBAgITHgAAAASPH+ttAmPMdwAAAAAABDANBgkqhkiG9w0BAQsF
+      ADAmMSQwIgYDVQQDExswMThnYy1KRENQUk9PVC1DQS1BdXRob3JpdHkwHhcNMjIw
+      MzE3MjMxNzA0WhcNMzIwMzE3MjMyNzA0WjAtMSswKQYDVQQDEyIwMThnYy1KRENQ
+      QURDU0lOVEVSTUUtQ0EtQXV0aG9yaXR5MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8A
+      MIIBCgKCAQEAx2EruAz9+jYG7eQHhcY4Fek/wyZvD5kx1H+z2m8Z63S6fX559brP
+      VGgoENGuz3T7/8ZJbMdMLWuOKHDRqS1soeRMKJcVDalht94scgV1PnHfmHbtZvwR
+      cnjFZjnC+oI8H7+hPxzeyNoImDFK+IMdlYj6tqtSzNzTrJIvTlr6J9NZixmJvDa7
+      Xem6xDL+9/FGNJoyehqNbtbPdLhynfHJOpn9MoSnv/mIAPQ/XV1Z3gkGc3wdnnpF
+      uTaEBAD5exR3NmJWn4VSOD0zcfd/A5ph/0Irf5S+IYa9cJmqQczaFOHbiO7Jy07I
+      ZR6jUkDQfUdgms5famYtwfYVALUaCyJNuQIDAQABo4IBmDCCAZQwEAYJKwYBBAGC
+      NxUBBAMCAQAwHQYDVR0OBBYEFI+pAA9or0rCsI4TmMoLaapTHEp2MBkGCSsGAQQB
+      gjcUAgQMHgoAUwB1AGIAQwBBMAsGA1UdDwQEAwIBhjAPBgNVHRMBAf8EBTADAQH/
+      MB8GA1UdIwQYMBaAFNZGdZjJdIXG5vAVy0ngJO2Emd3uMGgGA1UdHwRhMF8wXaBb
+      oFmGV2h0dHA6Ly9KRENQQURDU2ludGVybWUuMDE4Z2Mub25taWNyb3NvZnQuY29t
+      L0NlcnRFbnJvbGwvMDE4Z2MtSkRDUFJPT1QtQ0EtQXV0aG9yaXR5LmNybDCBnAYI
+      KwYBBQUHAQEEgY8wgYwwgYkGCCsGAQUFBzAChn1odHRwOi8vSkRDUEFEQ1NpbnRl
+      cm1lLjAxOGdjLm9ubWljcm9zb2Z0LmNvbS9DZXJ0RW5yb2xsL0pEQ1BBRENTUm9v
+      dC12bS4wMThnYy5vbm1pY3Jvc29mdC5jb21fMDE4Z2MtSkRDUFJPT1QtQ0EtQXV0
+      aG9yaXR5LmNydDANBgkqhkiG9w0BAQsFAAOCAgEAp1bp+/dvsGCXBUtTEijHIxrH
+      iBgSJhgwUEMcmJ7NUxtsVkNP6KJIL4bq5vWR94LGSDZ8J5D+j8NSCt1dPFUZptZ2
+      Jwfpv2JqmPjWAFKV9Od7an9xx/wRxwFvWuijk/rmqzPP27LTJsOFOOP5ZKIkrgvt
+      +ZHIbd3NNdzMsxnFHXaGRO8g3+y5h2dS1JRc66Arc6qQCNxhqWuMjvPF8SeIC+tL
+      28ei8d1pfK0uWIAUH0aZOWyczRSqOOp2z36ie9BavmPHJ757hDMqgyuqbaIOOQFj
+      VVCRJPzneCm7qoggv6clCYoPi9UAJxuY3JN+vBzROm7UofEq5Yh0n607NHETAHG7
+      eLjJPTutxwQp18EQaDxrN984GTOfjyhYZVc7AboXO+ltf54y90X28T4ksrTzsBXk
+      3I1IFvq16cBXQaY5VKXH8ESMpBPZHuFxusvcMOSDbx7h9KU8BslZL+0ndHvmOCsK
+      Gq7i8WfU+gsGhX7EfV0idn0rzWhg6FtDGfI3K8J4Vw8YbkUiDsq7JH3FS/pFXQPa
+      hEGcoovgBMRSNad0YwVWOOqccuGtCuZptzU/Bp37H0ZdQ89J0tOEGBlSW8kATqhb
+      btZ/61sQb6nrzr/Br848Xzqv/WRvx/7iMiTHou8P1gQKIdQtsxUx3OESB+nucMkg
+      nfByh19vqytAPeTBzsc=
+      -----END CERTIFICATE-----
+    permissions: '0755'
+runcmd:
+  - [ bash, "/run/scripts/install-az-tools.sh" ]
+  - [ bash, "/run/scripts/install-docker.sh" ]
+  - [ bash, "/run/scripts/install-node-tools.sh" ]
+  - [ bash, "/run/scripts/install-k8s-tools.sh" ]
